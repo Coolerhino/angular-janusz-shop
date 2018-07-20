@@ -1,0 +1,10 @@
+<h2>My januszes for sale</h2>
+<ul class="janusze">
+  <li *ngFor="let janusz of janusze" 
+      [class.selected]="janusz === selectedJanusz" 
+      (click)="onSelect(janusz)">
+    <span class="badge"> {{janusz.id}} </span> {{janusz.name}}
+  </li>
+</ul>
+
+<app-janusz-detail [janusz]="selectedJanusz"></app-janusz-detail>
