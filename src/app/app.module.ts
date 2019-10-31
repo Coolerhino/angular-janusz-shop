@@ -6,17 +6,21 @@ import { AppComponent } from './app.component';
 import { JanuszeComponent } from './janusze/janusze.component';
 import { JanuszDetailComponent } from './janusz-detail/janusz-detail.component';
 import { MessagesComponent } from './messages/messages.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     JanuszeComponent,
     JanuszDetailComponent,
-    MessagesComponent
+    MessagesComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

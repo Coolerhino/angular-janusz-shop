@@ -3,12 +3,12 @@ import { Janusz } from '../janusz';
 import { JanuszService } from '../janusz.service';
 
 @Component({
-  selector: 'app-janusze',
-  templateUrl: './janusze.component.html',
-  styleUrls: ['./janusze.component.css']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
-export class JanuszeComponent implements OnInit {
-  janusze: Janusz[];
+export class DashboardComponent implements OnInit {
+  janusze: Janusz[] = [];
 
   constructor(private januszService: JanuszService) { }
 
@@ -16,8 +16,8 @@ export class JanuszeComponent implements OnInit {
     this.getJanusze();
   }
 
-  getJanusze(): void {
+  getJanusze(): void{
     this.januszService.getJanusze()
-      .subscribe(janusze => this.janusze = janusze);
+      .subscribe(janusze => this.janusze = janusze.slice(1,5));
   }
 }

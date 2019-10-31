@@ -1,0 +1,9 @@
+<h3>Top3 ulubionych januszy</h3>
+<div class="grid grid-pad">
+  <a *ngFor="let janusz of janusze" class="col-1-4"
+      routerLink="/details/{{janusz.id}}">
+    <div class="module janusz">
+      <h4>{{janusz.name}}</h4>
+    </div>
+  </a>
+</div>

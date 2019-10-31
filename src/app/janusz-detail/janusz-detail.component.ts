@@ -1,4 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
+import { JanuszService }  from '../janusz.service';
 import { Janusz } from '../janusz';
 
 @Component({
@@ -9,9 +13,23 @@ import { Janusz } from '../janusz';
 export class JanuszDetailComponent implements OnInit {
   @Input() janusz: Janusz;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private januszService: JanuszService,
+    private location: Location
+  ) { }
 
   ngOnInit() {
+    this.getJanusz();
   }
 
+  getJanusz(): void{
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.januszService.getJanusz(id)
+      .subscribe(janusz => this.janusz = janusz);
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
 }
