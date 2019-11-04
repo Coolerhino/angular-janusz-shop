@@ -20,4 +20,13 @@ export class JanuszeComponent implements OnInit {
     this.januszService.getJanusze()
       .subscribe(janusze => this.janusze = janusze);
   }
+
+  add(name: string) {
+    name = name.trim();
+    if (!name) { return; }
+    this.januszService.addJanusz({ name } as Janusz)
+      .subscribe(janusz => {
+        this.janusze.push(janusz);
+      });
+  }
 }

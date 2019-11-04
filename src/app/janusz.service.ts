@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 
 import { Janusz } from './janusz';
 import { MessageService } from './message.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 
@@ -16,6 +16,9 @@ export class JanuszService {
   // TODO this need to be more configurable
   private mockApiId = '';
   private januszeUrl = `https://${this.mockApiId}.mockapi.io/janusze`;
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(
     private http: HttpClient,
@@ -36,6 +39,21 @@ export class JanuszService {
         tap(_ => this.log(`fetched janusz id=${id}`)),
         catchError(this.handleError<Janusz>('getJanusze'))
       );
+  }
+
+  updateJanusz(janusz: Janusz): Observable<Janusz> {
+    const url = `${this.januszeUrl}/${janusz.id}`;
+    return this.http.put(url, janusz, this.httpOptions).pipe(
+      tap(_ => this.log(`updated janusz id=${janusz.id}`)),
+      catchError(this.handleError<any>(`updateJanusz`))
+    );
+  }
+
+  addJanusz(janusz: Janusz): Observable<Janusz> {
+    return this.http.post(this.januszeUrl, janusz, this.httpOptions).pipe(
+      tap((newJanusz: Janusz) => this.log(`added janusz id=${newJanusz.id}`)),
+      catchError(this.handleError<Janusz>(`addJanusz`))
+    )
   }
 
   private log(message: string) {

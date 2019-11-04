@@ -32,4 +32,9 @@ export class JanuszDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  save(): void {
+    this.januszService.updateJanusz(this.janusz)
+      .subscribe(() => this.goBack());
+  }
 }
