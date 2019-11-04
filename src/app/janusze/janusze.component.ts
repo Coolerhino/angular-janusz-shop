@@ -29,4 +29,9 @@ export class JanuszeComponent implements OnInit {
         this.janusze.push(janusz);
       });
   }
+
+  delete(janusz: Janusz) : void {
+    this.janusze = this.janusze.filter(j => j !== janusz);
+    this.januszService.deleteJanusz(janusz).subscribe();
+  }
 }

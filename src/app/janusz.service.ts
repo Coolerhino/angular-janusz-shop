@@ -56,6 +56,16 @@ export class JanuszService {
     )
   }
 
+  deleteJanusz(janusz: Janusz | number): Observable<Janusz> {
+    const id = typeof janusz === 'number' ? janusz : janusz.id;
+    const url = `${this.januszeUrl}/${id}`;
+
+    return this.http.delete<Janusz>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`deleted janusz id=${id}`)),
+      catchError(this.handleError<Janusz>(`deleteJanusz`))
+    );
+  }
+
   private log(message: string) {
     this.messageService.add(`JanuszService: ${message}`);
   }
