@@ -32,6 +32,18 @@ export class JanuszService {
       );
   }
 
+  searchJanusze(term: string): Observable<Janusz[]> {
+    if (!term.trim()) {
+      return of([]);
+    }
+
+    return this.http.get<Janusz[]>(`${this.januszeUrl}/?search=${term}`)
+      .pipe(
+        tap(_ => this.log(`found janusze matching "${term}"`)),
+        catchError(this.handleError<Janusz[]>('searchJanusze', []))
+      );
+  }
+
   getJanusz(id: number): Observable<Janusz> {
     const url = `${this.januszeUrl}/${id}`;
     return this.http.get<Janusz>(url)
@@ -53,7 +65,7 @@ export class JanuszService {
     return this.http.post(this.januszeUrl, janusz, this.httpOptions).pipe(
       tap((newJanusz: Janusz) => this.log(`added janusz id=${newJanusz.id}`)),
       catchError(this.handleError<Janusz>(`addJanusz`))
-    )
+    );
   }
 
   deleteJanusz(janusz: Janusz | number): Observable<Janusz> {

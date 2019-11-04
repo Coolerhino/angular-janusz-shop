@@ -9,6 +9,7 @@ import { JanuszDetailComponent } from './janusz-detail/janusz-detail.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { JanuszSearchComponent } from './janusz-search/janusz-search.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     JanuszeComponent,
     JanuszDetailComponent,
     MessagesComponent,
-    DashboardComponent
+    DashboardComponent,
+    JanuszSearchComponent
   ],
   imports: [
     BrowserModule,
